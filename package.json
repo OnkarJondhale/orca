@@ -1,10 +1,14 @@
 {
   "name": "@orca-skill-manager/orca",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "***SKILL manager for agentic workflows***",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "orca": "src/bin/orca.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "directories": {
     "doc": "docs"
@@ -19,7 +23,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/OnkarJondhale/orca/issues"
   },
@@ -29,8 +32,5 @@
     "chalk": "^5.6.2",
     "commander": "^15.0.0",
     "fs-extra": "^11.3.5"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

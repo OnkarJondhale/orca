@@ -2,29 +2,22 @@
 // @orca/commands/lifecycle - Action handlers for skill states
 // ─────────────────────────────────────────────────────
 
-const { install } = require('../core/install');
+import { install } from '../core/install.js';
 
-function handleInstall(skill, options) {
+export function handleInstall(skill, options) {
     // Future work: engine.download() and engine.deploy()
     console.log(`Executing install routine for: ${skill}`);
     install(skill,options);
 }
 
-function handleDelete(skill) {
+export function handleDelete(skill) {
     console.log(`Executing deletion for local skill: ${skill}`);
 }
 
-function handleUpdate(skill) {
+export function handleUpdate(skill) {
     console.log(`Executing update event target: ${skill || 'Orca Self'}`);
 }
 
-function handleUpgrade() {
+export function handleUpgrade() {
     console.log(`Upgrading all installed workspace and system skills...`);
 }
-
-module.exports = {
-    handleInstall,
-    handleDelete,
-    handleUpdate,
-    handleUpgrade,
-};

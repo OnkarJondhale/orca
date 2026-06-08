@@ -4,18 +4,18 @@
 // @orca/bin - Global CLI entry point & Routing Layer
 // ─────────────────────────────────────────────────────
 
-const Command = require('commander').Command;
-const { 
+import { Command } from 'commander';
+import { 
     CLI_NAME, 
     CLI_DESCRIPTION, 
     CLI_VERSION, 
     OPTIONS, 
     COMMANDS 
-} = require('../utils/const');
+} from '../utils/const.js';
 
-const lifecycle = require('../commands/lifecycle');
-const query = require('../commands/query');
-const config = require('../commands/config');
+import * as lifecycle from '../commands/lifecycle.js';
+import * as query from '../commands/query.js';
+import * as config from '../commands/config.js';
 
 const program = new Command();
 

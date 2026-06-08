@@ -1,7 +1,7 @@
-const { REGISTRY, GLOBAL_SKILL_PATH } = require('../utils/const')
-const { execSync } = require('child_process')
-const fs = require('fs-extra')
-const path = require('path')
+import { REGISTRY, GLOBAL_SKILL_PATH } from '../utils/const.js'
+import { execSync } from 'child_process'
+import fs from 'fs-extra'
+import path from 'path'
 
 function run(cmd, options = {}) {
     execSync(cmd, {
@@ -102,4 +102,4 @@ function install(skill, options) {
     }
 }
 
-module.exports = { install }
+export { install }

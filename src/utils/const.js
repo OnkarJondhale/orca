@@ -2,11 +2,11 @@
 // @orca/utils - Defines constants & metadata definitions
 // ─────────────────────────────────────────────────────
 
-const CLI_NAME = "orca";
-const CLI_DESCRIPTION = "SKILL manager for agentic workflows";
-const CLI_VERSION = "1.0.0";
+export const CLI_NAME = "orca";
+export const CLI_DESCRIPTION = "SKILL manager for agentic workflows";
+export const CLI_VERSION = "1.0.1";
 
-const OPTIONS = {
+export const OPTIONS = {
     VERBOSE: {
         flags: '-v, --verbose',
         description: 'enable verbose logging'
@@ -34,7 +34,7 @@ const OPTIONS = {
     }
 };
 
-const COMMANDS = {
+export const COMMANDS = {
     // Core Lifecycle
     INSTALL: {
         name: 'install',
@@ -128,7 +128,5 @@ const COMMANDS = {
     }
 };
 
-const REGISTRY = ["github","npm","gitlab"]
-const GLOBAL_SKILL_PATH = ["~/.copilot/skills", "~/.claude/skills", "~/.kiro/skills"]
-
-module.exports = { CLI_NAME, CLI_DESCRIPTION, CLI_VERSION, OPTIONS, COMMANDS, REGISTRY,GLOBAL_SKILL_PATH };
+export const REGISTRY = ["github","npm","gitlab"]
+export const GLOBAL_SKILL_PATH = ["~/.copilot/skills", "~/.claude/skills", "~/.kiro/skills"]
