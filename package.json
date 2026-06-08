@@ -1,10 +1,10 @@
 {
-  "name": "orca",
+  "name": "@orca-skill-manager/orca",
   "version": "1.0.0",
   "description": "***SKILL manager for agentic workflows***",
   "main": "index.js",
   "bin": {
-    "orca": "./src/bin/orca.js"
+    "orca": "src/bin/orca.js"
   },
   "directories": {
     "doc": "docs"
@@ -29,5 +29,8 @@
     "chalk": "^5.6.2",
     "commander": "^15.0.0",
     "fs-extra": "^11.3.5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
