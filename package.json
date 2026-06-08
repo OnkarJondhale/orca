@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "***SKILL manager for agentic workflows***",
   "main": "index.js",
+  "bin": {
+    "orca": "./src/bin/orca.js"
+  },
   "directories": {
     "doc": "docs"
   },
