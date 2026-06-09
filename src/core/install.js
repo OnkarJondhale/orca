@@ -1,7 +1,8 @@
-import { REGISTRY, GLOBAL_SKILL_PATH } from '../utils/const.js'
+import { REGISTRY } from '../utils/const.js'
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
 import path from 'path'
+import os from 'os'
 
 function run(cmd, options = {}) {
     execSync(cmd, {
@@ -24,7 +25,7 @@ function install(skill, options) {
         }
 
         const repoUrl = "https://github.com/OnkarJondhale/orca-skills.git"
-        const tempDir = path.join(process.cwd(), "temp")
+        const tempDir = path.join(os.tmpdir(), "orca-tmp")
 
         console.log(`🦎 ORCA: Installing skill -> ${skill}`)
 
@@ -32,7 +33,7 @@ function install(skill, options) {
         fs.removeSync(tempDir)
 
         // 2. Clone repo (silent)
-        execSync(`git clone --filter=blob:none --no-checkout ${repoUrl} temp`, {
+        execSync(`git clone --filter=blob:none --no-checkout ${repoUrl} "${tempDir}"`, {
             stdio: "pipe"
         })
 
@@ -64,32 +65,36 @@ function install(skill, options) {
             throw new Error(`Skill "${skill}" not found in registry`)
         }
 
-        // 5. Install path
+        // 5. Resolve target directories based on flags
+        const resolveTargets = () => {
+            const dirs = []
+            if (options.claude) dirs.push('.claude')
+            if (options.copilot) dirs.push('.copilot')
+            if (options.kiro) dirs.push('.kiro')
+
+            if (dirs.length === 0 || dirs.length === 3) {
+                return ['.agents']
+            }
+            return dirs
+        }
+
         const installSkill = (targetRoot) => {
             fs.ensureDirSync(targetRoot)
-
             const dest = path.join(targetRoot, skill)
-
             fs.copySync(sourcePath, dest, { overwrite: true })
         }
 
-        // GLOBAL INSTALL
-        if (options.global) {
-            console.log(`🦎 ORCA: Mode -> Global Deployment`)
+        const basePath = options.global ? os.homedir() : process.cwd()
+        const mode = options.global ? 'Global' : 'Workspace'
+        const targets = resolveTargets()
 
-            GLOBAL_SKILL_PATH.forEach((targetPath) => {
-                console.log(`🦎 ORCA: Installing to -> ${targetPath}`)
-                installSkill(targetPath)
-            })
-        }
+        console.log(`🦎 ORCA: Mode -> ${mode} Deployment`)
 
-        // WORKSPACE INSTALL
-        else {
-            console.log(`🦎 ORCA: Mode -> Workspace Deployment`)
-
-            const workspacePath = path.join(process.cwd(), ".agents", "skills")
-            installSkill(workspacePath)
-        }
+        targets.forEach((target) => {
+            const fullPath = path.join(basePath, target, 'skills')
+            console.log(`🦎 ORCA: Installing to -> ${fullPath}`)
+            installSkill(fullPath)
+        })
 
         // 6. Cleanup
         fs.removeSync(tempDir)

@@ -52,6 +52,9 @@ program
     .argument(COMMANDS.INSTALL.arg, COMMANDS.INSTALL.argDescription)
     .option(OPTIONS.REGISTRY.flags, OPTIONS.REGISTRY.description)
     .option(OPTIONS.GLOBAL.flags, OPTIONS.GLOBAL.description)
+    .option(OPTIONS.CLAUDE.flags, OPTIONS.CLAUDE.description)
+    .option(OPTIONS.COPILOT.flags, OPTIONS.COPILOT.description)
+    .option(OPTIONS.KIRO.flags, OPTIONS.KIRO.description)
     .action(lifecycle.handleInstall);
 
 program

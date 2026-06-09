@@ -28,6 +28,18 @@ export const OPTIONS = {
         flags: '-g, --global',
         description: 'install target globally across all active IDE environments'
     },
+    CLAUDE: {
+        flags: '--claude',
+        description: 'install skill for Claude AI'
+    },
+    COPILOT: {
+        flags: '--copilot',
+        description: 'install skill for GitHub Copilot'
+    },
+    KIRO: {
+        flags: '--kiro',
+        description: 'install skill for Kiro AI'
+    },
     HELP: {
         flags: '-h, --help',
         description: 'Show help and usage information'
@@ -129,4 +141,3 @@ export const COMMANDS = {
 };
 
 export const REGISTRY = ["github","npm","gitlab"]
-export const GLOBAL_SKILL_PATH = ["~/.copilot/skills", "~/.claude/skills", "~/.kiro/skills"]
