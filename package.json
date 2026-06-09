@@ -1,6 +1,6 @@
 {
   "name": "@orca-skill-manager/orca",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "***SKILL manager for agentic workflows***",
   "main": "index.js",
   "type": "module",
