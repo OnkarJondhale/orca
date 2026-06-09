@@ -8,7 +8,7 @@ const CONFIG_PATH = path.join(ORCA_DIR, 'config.json')
 if (!fs.existsSync(CONFIG_PATH)) {
     fs.ensureDirSync(ORCA_DIR)
     fs.writeJsonSync(CONFIG_PATH, {
-        defaultRegistry: 'https://github.com/OnkarJondhale/orca-skills.git'
+        defaultRegistry: 'https://github.com/OnkarJondhale'
     }, { spaces: 2 })
     console.log('Created ~/.orca/config.json')
 }

@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import os from 'os'
 import chalk from 'chalk'
-import { ORCA_DIR, ORCA_CONFIG_FILE, ORCA_CREDENTIALS_FILE, DEFAULT_REPO_URL } from './const.js'
+import { ORCA_DIR, ORCA_CONFIG_FILE, ORCA_CREDENTIALS_FILE, DEFAULT_REGISTRY_URL } from './const.js'
 
 const VALID_KEYS = ['pat', 'ssh', 'registry']
 
@@ -59,13 +59,13 @@ export function parseConfigPair(pair) {
     return [key, value]
 }
 
-export function getRepoUrl(registryFlag) {
-    if (registryFlag && registryFlag !== 'github') {
+export function getRegistryUrl(registryFlag) {
+    if (registryFlag) {
         return registryFlag
     }
 
     const config = readConfig()
-    return config.defaultRegistry || DEFAULT_REPO_URL
+    return config.defaultRegistry || DEFAULT_REGISTRY_URL
 }
 
 export function getToken(cliToken) {

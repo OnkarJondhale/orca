@@ -59,7 +59,7 @@ program
     .command(COMMANDS.INSTALL.name)
     .description(COMMANDS.INSTALL.description)
     .argument(COMMANDS.INSTALL.arg, COMMANDS.INSTALL.argDescription)
-    .option(OPTIONS.REGISTRY.flags, 'GitHub repo URL (defaults to orca official skill registry)')
+    .option(OPTIONS.REGISTRY.flags, 'GitHub user/org base URL (defaults to https://github.com/OnkarJondhale)')
     .option(OPTIONS.GLOBAL.flags, OPTIONS.GLOBAL.description)
     .option(OPTIONS.CLAUDE.flags, OPTIONS.CLAUDE.description)
     .option(OPTIONS.COPILOT.flags, OPTIONS.COPILOT.description)

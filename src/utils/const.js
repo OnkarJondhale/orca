@@ -28,8 +28,8 @@ export const OPTIONS = {
         default: 'tool'
     },
     REGISTRY: {
-        flags: '--registry <name>',
-        description: 'specify target registry source'
+        flags: '--registry <url>',
+        description: 'GitHub user/org base URL (e.g., https://github.com/username)'
     },
     GLOBAL: {
         flags: '-g, --global',
@@ -147,8 +147,7 @@ export const COMMANDS = {
     }
 };
 
-export const REGISTRY = ["github"]
-export const DEFAULT_REPO_URL = "https://github.com/OnkarJondhale/orca-skills.git"
+export const DEFAULT_REGISTRY_URL = "https://github.com/OnkarJondhale"
 export const ORCA_DIR = path.join(os.homedir(), ".orca")
 export const ORCA_CONFIG_FILE = path.join(ORCA_DIR, "config.json")
 export const ORCA_CREDENTIALS_FILE = path.join(ORCA_DIR, "credentials")
