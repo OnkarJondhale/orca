@@ -1,13 +1,14 @@
-// ─────────────────────────────────────────────────────
-// @orca/commands/lifecycle - Action handlers for skill states
-// ─────────────────────────────────────────────────────
-
 import { install } from '../core/install.js';
+import { parseConfigPair, writeCredential } from '../utils/config.js';
 
-export function handleInstall(skill, options) {
-    // Future work: engine.download() and engine.deploy()
+export async function handleInstall(skill, options) {
     console.log(`Executing install routine for: ${skill}`);
-    install(skill,options);
+    await install(skill, options);
+}
+
+export function handleConfigWrite(raw) {
+    const [key, value] = parseConfigPair(raw);
+    writeCredential(key, value);
 }
 
 export function handleDelete(skill) {

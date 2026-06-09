@@ -25,10 +25,19 @@ program
     .description(CLI_DESCRIPTION)
     .version(CLI_VERSION, '--version', 'Show utility version');
 
+// Handle --config manually before commander parsing
+const configIndex = process.argv.findIndex(a => a === '--config' || a === '-c')
+if (configIndex !== -1 && configIndex + 1 < process.argv.length) {
+    const value = process.argv[configIndex + 1]
+    if (!value.startsWith('-')) {
+        lifecycle.handleConfigWrite(value)
+        process.exit(0)
+    }
+}
+
 // Set up global flag capabilities
 program
-    .option(OPTIONS.VERBOSE.flags, OPTIONS.VERBOSE.description)
-    .option(OPTIONS.CONFIG.flags, OPTIONS.CONFIG.description);
+    .option(OPTIONS.VERBOSE.flags, OPTIONS.VERBOSE.description);
 
 // Overriding default help command string description flag target
 program
@@ -37,12 +46,12 @@ program
 // Custom layout grouping print block helper output for --help requests
 program.addHelpText('after', `
 Classification Overview:
-  🔑 Core Lifecycle      install, delete, update, upgrade
-  📋 Listing & Info       list, describe, info, search
-  🛠️  Creation            create, publish, delete-remote
-  👤 Authentication      login, logout
-  🔒 Security            verify
-  ⚙️  Diagnostics         doctor
+  Core Lifecycle          install, delete, update, upgrade
+  Listing & Info          list, describe, info, search
+  Creation                create, publish, delete-remote
+  Authentication          login, logout
+  Security                verify
+  Diagnostics             doctor
 `);
 
 // 1. CORE LIFECYCLE SUB-COMMANDS
@@ -50,11 +59,12 @@ program
     .command(COMMANDS.INSTALL.name)
     .description(COMMANDS.INSTALL.description)
     .argument(COMMANDS.INSTALL.arg, COMMANDS.INSTALL.argDescription)
-    .option(OPTIONS.REGISTRY.flags, OPTIONS.REGISTRY.description)
+    .option(OPTIONS.REGISTRY.flags, 'GitHub repo URL (defaults to orca official skill registry)')
     .option(OPTIONS.GLOBAL.flags, OPTIONS.GLOBAL.description)
     .option(OPTIONS.CLAUDE.flags, OPTIONS.CLAUDE.description)
     .option(OPTIONS.COPILOT.flags, OPTIONS.COPILOT.description)
     .option(OPTIONS.KIRO.flags, OPTIONS.KIRO.description)
+    .option(OPTIONS.TOKEN.flags, OPTIONS.TOKEN.description)
     .action(lifecycle.handleInstall);
 
 program

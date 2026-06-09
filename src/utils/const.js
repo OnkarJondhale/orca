@@ -2,6 +2,9 @@
 // @orca/utils - Defines constants & metadata definitions
 // ─────────────────────────────────────────────────────
 
+import path from 'path'
+import os from 'os'
+
 export const CLI_NAME = "orca";
 export const CLI_DESCRIPTION = "SKILL manager for agentic workflows";
 export const CLI_VERSION = "1.0.1";
@@ -12,8 +15,12 @@ export const OPTIONS = {
         description: 'enable verbose logging'
     },
     CONFIG: {
-        flags: '-c, --config <path>',
-        description: 'path to configuration file'
+        flags: '-c, --config <key:value>',
+        description: 'set credential key:value pair (keys: pat, ssh, registry)'
+    },
+    TOKEN: {
+        flags: '--token <pat>',
+        description: 'GitHub Personal Access Token for private repo authentication'
     },
     TYPE: {
         flags: '-t, --type <type>',
@@ -140,4 +147,8 @@ export const COMMANDS = {
     }
 };
 
-export const REGISTRY = ["github","npm","gitlab"]
+export const REGISTRY = ["github"]
+export const DEFAULT_REPO_URL = "https://github.com/OnkarJondhale/orca-skills.git"
+export const ORCA_DIR = path.join(os.homedir(), ".orca")
+export const ORCA_CONFIG_FILE = path.join(ORCA_DIR, "config.json")
+export const ORCA_CREDENTIALS_FILE = path.join(ORCA_DIR, "credentials")
