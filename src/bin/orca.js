@@ -58,26 +58,30 @@ Classification Overview:
 program
     .command(COMMANDS.INSTALL.name)
     .description(COMMANDS.INSTALL.description)
-    .argument(COMMANDS.INSTALL.arg, COMMANDS.INSTALL.argDescription)
+    .argument('[skill]', 'name of the skill (derived from -f path if omitted)')
     .option(OPTIONS.REGISTRY.flags, 'full GitHub repo URL containing skills (defaults to https://github.com/OnkarJondhale/orca-skills.git)')
     .option(OPTIONS.GLOBAL.flags, OPTIONS.GLOBAL.description)
     .option(OPTIONS.CLAUDE.flags, OPTIONS.CLAUDE.description)
     .option(OPTIONS.COPILOT.flags, OPTIONS.COPILOT.description)
     .option(OPTIONS.KIRO.flags, OPTIONS.KIRO.description)
     .option(OPTIONS.TOKEN.flags, OPTIONS.TOKEN.description)
+    .option(OPTIONS.NAME.flags, OPTIONS.NAME.description)
+    .option(OPTIONS.FILE.flags, OPTIONS.FILE.description)
     .action(lifecycle.handleInstall);
 
 program
     .command(COMMANDS.DELETE.name)
     .description(COMMANDS.DELETE.description)
-    .argument(COMMANDS.DELETE.arg, COMMANDS.DELETE.argDescription)
+    .argument('[skill]', 'name of the skill to delete (omit if using -f)')
     .option(OPTIONS.GLOBAL.flags, OPTIONS.GLOBAL.description)
+    .option(OPTIONS.FILE.flags, OPTIONS.FILE.description)
     .action(lifecycle.handleDelete);
 
 program
     .command(COMMANDS.UPDATE.name)
     .description(COMMANDS.UPDATE.description)
     .argument(COMMANDS.UPDATE.arg, COMMANDS.UPDATE.argDescription)
+    .option(OPTIONS.FILE.flags, OPTIONS.FILE.description)
     .action(lifecycle.handleUpdate);
 
 program
@@ -92,6 +96,7 @@ program
     .option(OPTIONS.LIST_ALL.flags, OPTIONS.LIST_ALL.description)
     .option(OPTIONS.MARKETPLACE.flags, OPTIONS.MARKETPLACE.description)
     .option(OPTIONS.REMOTE.flags, OPTIONS.REMOTE.description)
+    .option(OPTIONS.PATH.flags, OPTIONS.PATH.description)
     .action(query.handleList);
 
 program

@@ -31,6 +31,10 @@ export const OPTIONS = {
         flags: '--registry <url>',
         description: 'GitHub user/org base URL (e.g., https://github.com/username)'
     },
+    NAME: {
+        flags: '--name <name>',
+        description: 'custom name for the skill (defaults to the skill directory name)'
+    },
     GLOBAL: {
         flags: '-g, --global',
         description: 'install target globally across all active IDE environments'
@@ -59,6 +63,14 @@ export const OPTIONS = {
         flags: '--remote',
         description: 'list skills from the configured remote registry'
     },
+    FILE: {
+        flags: '-f, --file <path>',
+        description: 'install/delete/update a skill from a local file path'
+    },
+    PATH: {
+        flags: '--path',
+        description: 'show the full file path of each skill'
+    },
     HELP: {
         flags: '-h, --help',
         description: 'Show help and usage information'
@@ -70,14 +82,14 @@ export const COMMANDS = {
     INSTALL: {
         name: 'install',
         description: 'Install a skill from registry, git repo, or local path',
-        arg: '<skill>',
-        argDescription: 'name of the skill, git repository URL, or local filepath'
+        arg: '[skill]',
+        argDescription: 'name of the skill (derived from -f path if omitted)'
     },
     DELETE: {
         name: 'delete',
         description: 'Delete a skill from local storage',
-        arg: '<skill>',
-        argDescription: 'the name of the local skill to remove'
+        arg: '[skill]',
+        argDescription: 'name of the skill to delete (omit if using -f)'
     },
     UPDATE: {
         name: 'update',

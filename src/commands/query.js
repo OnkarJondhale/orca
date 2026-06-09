@@ -2,13 +2,13 @@ import { listLocal, listAll, listMarketplace, listRemote } from '../core/list.js
 
 export function handleList(options) {
     if (options.marketplace) {
-        listMarketplace()
+        listMarketplace(options)
     } else if (options.remote) {
-        listRemote()
+        listRemote(options)
     } else if (options.all) {
-        listAll()
+        listAll(options)
     } else {
-        listLocal()
+        listLocal(options)
     }
 }
 
