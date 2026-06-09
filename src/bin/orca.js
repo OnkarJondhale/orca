@@ -87,6 +87,7 @@ program
 program
     .command(COMMANDS.UPGRADE.name)
     .description(COMMANDS.UPGRADE.description)
+    .argument('[version]', 'target version (omit for latest)')
     .action(lifecycle.handleUpgrade);
 
 // 2. LISTING & INFORMATION ACTIONS

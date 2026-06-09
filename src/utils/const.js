@@ -7,7 +7,7 @@ import os from 'os'
 
 export const CLI_NAME = "orca";
 export const CLI_DESCRIPTION = "SKILL manager for agentic workflows";
-export const CLI_VERSION = "1.0.1";
+export const CLI_VERSION = "1.0.3";
 
 export const OPTIONS = {
     VERBOSE: {
@@ -99,7 +99,9 @@ export const COMMANDS = {
     },
     UPGRADE: {
         name: 'upgrade',
-        description: 'Update all installed skills at once'
+        description: 'Update the orca CLI tool to latest or specific version',
+        arg: '[version]',
+        argDescription: 'target version (omit for latest)'
     },
 
     // Listing & Info

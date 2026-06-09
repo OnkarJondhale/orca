@@ -1,6 +1,6 @@
 import path from 'path'
 import chalk from 'chalk'
-import { install, deleteSkillCmd, updateSkill } from '../core/index.js';
+import { install, deleteSkillCmd, updateSkill, upgradeCLI } from '../core/index.js';
 import { parseConfigPair, writeCredential } from '../utils/index.js';
 
 export async function handleInstall(skill, options) {
@@ -55,6 +55,6 @@ export function handleUpdate(skill, options) {
     updateSkill(skill, options);
 }
 
-export function handleUpgrade() {
-    console.log(`Upgrading all installed workspace and system skills...`);
+export function handleUpgrade(version) {
+    upgradeCLI(version)
 }
