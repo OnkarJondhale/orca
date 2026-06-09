@@ -18,14 +18,12 @@ async function install(skill, options) {
     const tempDir = path.join(os.tmpdir(), "orca-tmp")
 
     try {
-        const registryUrl = getRegistryUrl(options.registry)
-        const repoUrl = `${registryUrl}/${skill}.git`
+        const repoUrl = getRegistryUrl(options.registry)
 
         console.log(`${ORCA} Installing skill -> ${skill}`)
 
         fs.removeSync(tempDir)
 
-        // Try anonymous clone first
         try {
             execSync(`git clone "${repoUrl}" "${tempDir}"`, { stdio: "pipe" })
         } catch (err) {
@@ -63,9 +61,22 @@ async function install(skill, options) {
 
         console.log(`${ORCA} Repository synced`)
 
-        // Validate skill has orca.json manifest (skip for default registry)
-        if (registryUrl !== DEFAULT_REGISTRY_URL) {
-            validateSkill(tempDir)
+        // Sparse checkout the skill directory
+        execSync(`git sparse-checkout init --cone`, { cwd: tempDir, stdio: "pipe" })
+        execSync(`git sparse-checkout set ${skill}`, { cwd: tempDir, stdio: "pipe" })
+        execSync(`git checkout`, { cwd: tempDir, stdio: "pipe" })
+
+        console.log(`${ORCA} Fetching skill -> ${skill}`)
+
+        const sourcePath = path.join(tempDir, skill)
+
+        if (!fs.existsSync(sourcePath)) {
+            fs.removeSync(tempDir)
+            throw new Error(`Skill "${skill}" not found in registry`)
+        }
+
+        if (repoUrl !== DEFAULT_REGISTRY_URL) {
+            validateSkill(sourcePath)
         }
 
         const resolveTargets = () => {
@@ -83,7 +94,7 @@ async function install(skill, options) {
         const installSkill = (targetRoot) => {
             fs.ensureDirSync(targetRoot)
             const dest = path.join(targetRoot, skill)
-            fs.copySync(tempDir, dest, { overwrite: true })
+            fs.copySync(sourcePath, dest, { overwrite: true })
         }
 
         const basePath = options.global ? os.homedir() : process.cwd()

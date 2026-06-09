@@ -59,7 +59,7 @@ program
     .command(COMMANDS.INSTALL.name)
     .description(COMMANDS.INSTALL.description)
     .argument(COMMANDS.INSTALL.arg, COMMANDS.INSTALL.argDescription)
-    .option(OPTIONS.REGISTRY.flags, 'GitHub user/org base URL (defaults to https://github.com/OnkarJondhale)')
+    .option(OPTIONS.REGISTRY.flags, 'full GitHub repo URL containing skills (defaults to https://github.com/OnkarJondhale/orca-skills.git)')
     .option(OPTIONS.GLOBAL.flags, OPTIONS.GLOBAL.description)
     .option(OPTIONS.CLAUDE.flags, OPTIONS.CLAUDE.description)
     .option(OPTIONS.COPILOT.flags, OPTIONS.COPILOT.description)
@@ -71,6 +71,7 @@ program
     .command(COMMANDS.DELETE.name)
     .description(COMMANDS.DELETE.description)
     .argument(COMMANDS.DELETE.arg, COMMANDS.DELETE.argDescription)
+    .option(OPTIONS.GLOBAL.flags, OPTIONS.GLOBAL.description)
     .action(lifecycle.handleDelete);
 
 program

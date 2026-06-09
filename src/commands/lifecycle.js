@@ -1,4 +1,5 @@
 import { install } from '../core/install.js';
+import { deleteSkillCmd } from '../core/delete.js';
 import { parseConfigPair, writeCredential } from '../utils/config.js';
 
 export async function handleInstall(skill, options) {
@@ -11,8 +12,8 @@ export function handleConfigWrite(raw) {
     writeCredential(key, value);
 }
 
-export function handleDelete(skill) {
-    console.log(`Executing deletion for local skill: ${skill}`);
+export function handleDelete(skill, options) {
+    deleteSkillCmd(skill, options);
 }
 
 export function handleUpdate(skill) {
