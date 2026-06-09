@@ -47,6 +47,18 @@ export const OPTIONS = {
         flags: '--kiro',
         description: 'install skill for Kiro AI'
     },
+    LIST_ALL: {
+        flags: '-a, --all',
+        description: 'list all skills (local and global)'
+    },
+    MARKETPLACE: {
+        flags: '--marketplace',
+        description: 'list official skills from orca marketplace'
+    },
+    REMOTE: {
+        flags: '--remote',
+        description: 'list skills from the configured remote registry'
+    },
     HELP: {
         flags: '-h, --help',
         description: 'Show help and usage information'
@@ -81,9 +93,7 @@ export const COMMANDS = {
     // Listing & Info
     LIST: {
         name: 'list',
-        description: 'List all skills installed locally',
-        arg: '[target]',
-        argDescription: 'specify "remote" to fetch available marketplace instances instead'
+        description: 'List skills installed locally'
     },
     DESCRIBE: {
         name: 'describe',
@@ -148,6 +158,8 @@ export const COMMANDS = {
 };
 
 export const DEFAULT_REGISTRY_URL = "https://github.com/OnkarJondhale/orca-skills.git"
+export const MARKETPLACE_URL = "https://github.com/OnkarJondhale/orca-skills.git"
 export const ORCA_DIR = path.join(os.homedir(), ".orca")
 export const ORCA_CONFIG_FILE = path.join(ORCA_DIR, "config.json")
 export const ORCA_CREDENTIALS_FILE = path.join(ORCA_DIR, "credentials")
+export const ORCA_INSTALLED_FILE = path.join(ORCA_DIR, "installed.json")

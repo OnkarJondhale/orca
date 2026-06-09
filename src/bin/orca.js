@@ -11,7 +11,7 @@ import {
     CLI_VERSION, 
     OPTIONS, 
     COMMANDS 
-} from '../utils/const.js';
+} from '../utils/index.js';
 
 import * as lifecycle from '../commands/lifecycle.js';
 import * as query from '../commands/query.js';
@@ -89,7 +89,9 @@ program
 program
     .command(COMMANDS.LIST.name)
     .description(COMMANDS.LIST.description)
-    .argument(COMMANDS.LIST.arg, COMMANDS.LIST.argDescription)
+    .option(OPTIONS.LIST_ALL.flags, OPTIONS.LIST_ALL.description)
+    .option(OPTIONS.MARKETPLACE.flags, OPTIONS.MARKETPLACE.description)
+    .option(OPTIONS.REMOTE.flags, OPTIONS.REMOTE.description)
     .action(query.handleList);
 
 program

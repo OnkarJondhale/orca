@@ -1,6 +1,5 @@
-import { getRegistryUrl, getToken, promptGitCache } from '../utils/config.js'
-import { DEFAULT_REGISTRY_URL } from '../utils/const.js'
-import { validateSkill } from '../core/validators.js'
+import { getRegistryUrl, getToken, promptGitCache, DEFAULT_REGISTRY_URL, addInstalledSkill } from '../utils/index.js'
+import { validateSkill } from './index.js'
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
 import path from 'path'
@@ -108,6 +107,13 @@ async function install(skill, options) {
             console.log(`${ORCA} Installing to -> ${fullPath}`)
             installSkill(fullPath)
         })
+
+        // Track installation
+        const scope = options.global ? 'global' : 'local'
+        const isOfficial = repoUrl === DEFAULT_REGISTRY_URL
+        const author = isOfficial ? 'orca-skills' : 'NA'
+        const installPath = path.join(basePath, targets[0], 'skills', skill)
+        addInstalledSkill(skill, scope, isOfficial, author, installPath)
 
         fs.removeSync(tempDir)
 

@@ -1,9 +1,15 @@
-// ─────────────────────────────────────────────────────
-// @orca/commands/query - Action handlers for read-only lookups
-// ─────────────────────────────────────────────────────
+import { listLocal, listAll, listMarketplace, listRemote } from '../core/list.js';
 
-export function handleList(target, options) {
-    console.log(`Querying skill entries layout map. Scope parameter: ${target || 'local'}`);
+export function handleList(options) {
+    if (options.marketplace) {
+        listMarketplace()
+    } else if (options.remote) {
+        listRemote()
+    } else if (options.all) {
+        listAll()
+    } else {
+        listLocal()
+    }
 }
 
 export function handleDescribe(skill) {

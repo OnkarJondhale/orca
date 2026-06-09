@@ -1,2 +1,6 @@
 node_modules/
 output-style.md
+.agents/
+.claude/
+.copilot/
+.kiro/

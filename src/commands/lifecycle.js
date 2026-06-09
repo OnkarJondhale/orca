@@ -1,6 +1,5 @@
-import { install } from '../core/install.js';
-import { deleteSkillCmd } from '../core/delete.js';
-import { parseConfigPair, writeCredential } from '../utils/config.js';
+import { install, deleteSkillCmd } from '../core/index.js';
+import { parseConfigPair, writeCredential } from '../utils/index.js';
 
 export async function handleInstall(skill, options) {
     console.log(`Executing install routine for: ${skill}`);
